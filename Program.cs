@@ -14,6 +14,9 @@ namespace OOPAssignment3
         {
         
             FileManipulation fileManipulation = new FileManipulation();
+
+           
+
             fileManipulation.ObtainGitRepos();
 
             fileManipulation.DisplayGitRepos();
@@ -22,7 +25,7 @@ namespace OOPAssignment3
 
             fileManipulation.CompareFiles();
 
-           
+
             Console.ReadKey();
         }
     }
