@@ -25,6 +25,10 @@ namespace OOPAssignment3
 
             fileManipulation.CompareFiles();
 
+            fileManipulation.LogFile();
+
+
+            Console.WriteLine("\nThe file comparisons will be available to read in the Output.txt file!");
 
             Console.ReadKey();
         }
