@@ -18,6 +18,10 @@ namespace OOPAssignment3
         private string[] lines1;
         private string[] lines2;
         //Declaring the variables required for the program
+
+        private List<int> difflines = new List<int>();
+        //this line of code creates a list which will contain the lines in the files which have differences 
+
         public void ObtainGitRepos()
         {
             GitRepos.Add(1, "GitRepositories_1a.txt");
@@ -75,8 +79,7 @@ namespace OOPAssignment3
                 lines1 = Git1a.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
                 lines2 = Git1b.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
                 //this section of code will create arrays of the text in the files with each item of the array being a line of the file
-                List<int> difflines = new List<int>();
-                //this line of code creates a list which will contain the lines in the files which have differences 
+                
                 for (int x = 0; x <= lines1.Length - 1; x++)
                 {
                     if (lines1[x] != lines2[x])
@@ -97,11 +100,16 @@ namespace OOPAssignment3
             }
         }
 
+        
+
         public void LogFile()
         {
             FileStream ostrm;
             StreamWriter writer;
             TextWriter oldOut = Console.Out;
+
+            File.WriteAllText("./Output.txt", string.Empty);
+
             try
             {
                 ostrm = new FileStream("./Output.txt", FileMode.OpenOrCreate, FileAccess.Write);
@@ -114,13 +122,25 @@ namespace OOPAssignment3
                 return;
             }
             Console.SetOut(writer);
-            Console.WriteLine("This is a line of text");
-            Console.WriteLine("Everything written to Console.Write() or");
-            Console.WriteLine("Console.WriteLine() will be written to a file");
+            Console.WriteLine("Finished comparing the files.\n");
+            if (difflines.Count() != 0)
+            {
+
+                Console.WriteLine("There are differences in the files on the following lines:");
+
+                foreach (int diffline in difflines)
+                {
+                    Console.WriteLine(diffline);
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no differences in the files");
+            }
             Console.SetOut(oldOut);
             writer.Close();
             ostrm.Close();
-            Console.WriteLine("Done");
+         
         }
     }
 }
