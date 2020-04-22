@@ -107,9 +107,10 @@ namespace OOPAssignment3
             FileStream ostrm;
             StreamWriter writer;
             TextWriter oldOut = Console.Out;
-
+            //these are the variables needed for this method.
             File.WriteAllText("./Output.txt", string.Empty);
-
+            //This line of code clears the output log for the new run through the console
+            //In a actual log file i would leave it all there but this one is for the purpose of demonstration.
             try
             {
                 ostrm = new FileStream("./Output.txt", FileMode.OpenOrCreate, FileAccess.Write);
@@ -121,8 +122,11 @@ namespace OOPAssignment3
                 Console.WriteLine(e.Message);
                 return;
             }
+            //this try catch conditional will attempt to open the output text file and if it cant be opened, will generate a error message stating the reason why.
+
             Console.SetOut(writer);
             Console.WriteLine("Finished comparing the files.\n");
+
             if (difflines.Count() != 0)
             {
 
@@ -138,9 +142,10 @@ namespace OOPAssignment3
                 Console.WriteLine("There are no differences in the files");
             }
             Console.SetOut(oldOut);
+            //this will write a summary of the differences in the lines of the files which will be written to the output file.
             writer.Close();
             ostrm.Close();
-         
+            //this closes the connection to the output file
         }
     }
 }
